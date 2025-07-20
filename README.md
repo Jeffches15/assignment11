@@ -1,6 +1,21 @@
 # 📦 Project Setup
 
----
+## How to run tests locally
+In order to run these pytests, the first command to run is: docker compose up -d --build. This command builds the image if its not already there, and starts the containers and it in the background. This "unlocks" the terminal, allowing pytest commands to be entered. We need to run this docker command because we are interacting with a PostgreSQL database and a server to connect to.
+
+Running 'pytest' runs every test function in every test file, but I split this up into several commands. I ran pytest file by file in this order:
+
+- pytest -v -s tests/integration/test_user.py
+- pytest -v -s tests/integration/test_user.py --preserve-db (check data in PostgreSQL database)
+- pytest -v -s tests/integration/test_schema_base.py
+- pytest -v -s tests/integration/test_user_auth.py
+- pytest -v -s tests/integration/test_user_auth.py --preserve-db (check data in PostgreSQL)
+- pytest -v -s tests/integration/test_fastapi_calculator.py
+- pytest -v -s tests/integration/test_dependencies.py
+- pytest -v -s tests/integration/test_database.py
+- pytest -v -s tests/e2e/test_e2e.py
+- pytest -v -s tests/unit/test_calculator.py
+Note: -s: show print/log output: tells pytest not to capture stdout/sterr, so print() statements and logging messages are shown immediately in the terminal -v: verbose output: shows the full name and their individual results (e.g., PASSED, FAILED) of each test function instead of just a dot (.)
 
 # 🧩 1. Install Homebrew (Mac Only)
 
