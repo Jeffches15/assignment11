@@ -43,14 +43,12 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
           playwright install
-      - name: Run tests
+      - name: Run all tests with coverage
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
         run: |
           source venv/bin/activate
-          pytest tests/unit/ --cov=src --junitxml=test-results/junit.xml
-          pytest tests/integration/
-          pytest tests/e2e/
+          pytest tests/ --cov=src --junitxml=test-results/junit.xml
   security:
     needs: test
     runs-on: ubuntu-latest
