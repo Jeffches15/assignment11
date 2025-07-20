@@ -1,5 +1,8 @@
 # 📦 Project Setup
 
+
+
+
 ## How to run tests locally
 In order to run these pytests, the first command to run is: docker compose up -d --build. This command builds the image if its not already there, and starts the containers and it in the background. This "unlocks" the terminal, allowing pytest commands to be entered. We need to run this docker command because we are interacting with a PostgreSQL database and a server to connect to.
 
