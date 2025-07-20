@@ -6,13 +6,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import UUID, Column, DateTime, Enum, Float, ForeignKey
 
 from app.models.base import Base
-
-class CalculationType(enum.Enum):
-    ADDITION = "addition"
-    SUBTRACTION = "subtraction"
-    MULTIPLICATION = "multiplication"
-    DIVISION = "division"
-
+from app.schemas.calculation import CalculationType
 # SQLAlchemy ORM model that defines how a "calculation" is stored in the database 
 class Calculation(Base):
     """Base calculation model"""
