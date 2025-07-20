@@ -35,38 +35,18 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-
       - name: Install dependencies
-        env:
-          DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
         run: |
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
           playwright install
-
-      - name: Initialize database schema
-        env:
-          DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
+      - name: Run tests
         run: |
           source venv/bin/activate
-          python -c "from app.database import Base, engine; import app.models.user, app.models.calculation; Base.metadata.create_all(bind=engine)"
-
-
-      - name: Clean DB before tests
-        env:
-          DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
-        run: |
-          sudo apt-get update && sudo apt-get install -y postgresql-client
-          psql $DATABASE_URL -c "TRUNCATE TABLE calculations RESTART IDENTITY CASCADE;"
-          psql $DATABASE_URL -c "TRUNCATE TABLE users RESTART IDENTITY CASCADE;"
-
-      - name: Run all tests with coverage
-        env:
-          DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
-        run: |
-          source venv/bin/activate
-          pytest tests/ --cov=app --junitxml=test-results/junit.xml
+          pytest tests/unit/ --cov=src --junitxml=test-results/junit.xml
+          pytest tests/integration/
+          pytest tests/e2e/
   security:
     needs: test
     runs-on: ubuntu-latest
