@@ -2,7 +2,7 @@
 
 import pytest
 from app.models.calculation_factory import CalculationFactory
-from app.models.calculation import CalculationType
+from app.schemas.calculation import CalculationType
 from app.models.calculation import Addition, Subtraction, Multiplication, Division
 
 @pytest.mark.parametrize("calc_type, a, b, expected_class, expected_result", [

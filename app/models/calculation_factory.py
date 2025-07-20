@@ -1,5 +1,5 @@
 from app.models.calculation import Addition, Subtraction, Multiplication, Division, Calculation
-from app.models.calculation import CalculationType
+from app.schemas.calculation import CalculationType
 
 # The factory replaces manual if/else logic where you choose 
     # and instantiate calculation subclasses (Addition, Subtraction, etc.) based on the type.
