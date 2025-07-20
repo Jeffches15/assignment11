@@ -62,6 +62,7 @@ def test_calculation_read_schema_valid():
 
 # db_session: Provide a test-scoped database session
 # test_user: Create and return a single test user.
+@pytest.mark.order(2)
 def test_create_calculation_with_factory(db_session, test_user):
     # Arrange: create the input schema (CalculationCreate)
     calculation_create = CalculationCreate(
@@ -89,11 +90,6 @@ def test_create_calculation_with_factory(db_session, test_user):
     db_session.add(db_calc)
     db_session.commit()
     db_session.refresh(db_calc)
-
-    print(f"Calculation ID after commit: {db_calc.id}")
-    all_calcs = db_session.query(Calculation).filter_by(user_id=test_user.id).all()
-    print(f"Calculations in DB for user: {len(all_calcs)}")
-
 
     # Assert
     assert db_calc.id is not None
