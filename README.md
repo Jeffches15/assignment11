@@ -1,6 +1,17 @@
 # 📦 Project Setup
 
+## Successful GitHub actions screenshot:
 
+![Successful GitHub Actions](./screenshots/github%20actions%20pic.png)
+
+
+## Successful Docker image deployment screenshots:
+
+https://hub.docker.com/r/jeffches15/assignment11
+
+![Successful Docker Image 1](./screenshots/docker%20image%20pic.png)
+
+![Successful Dokcer Image 2](./screenshots/docker%20image%20pic%202.png)
 
 
 ## How to run tests locally
