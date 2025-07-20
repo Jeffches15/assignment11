@@ -51,7 +51,7 @@ def test_managed_session():
 # Session Handling & Partial Commits
 # ======================================================================================
 
-@pytest.mark.order(1)
+#@pytest.mark.order(1)
 def test_session_handling(db_session):
     """
     Demonstrate partial commits:
