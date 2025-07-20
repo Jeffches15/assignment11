@@ -52,6 +52,14 @@ jobs:
           source venv/bin/activate
           python -c "from app.database import Base, engine; Base.metadata.create_all(bind=engine)"
 
+      - name: Clean DB before tests
+        env:
+          DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
+        run: |
+          sudo apt-get update && sudo apt-get install -y postgresql-client
+          psql $DATABASE_URL -c "TRUNCATE TABLE calculations RESTART IDENTITY CASCADE;"
+          psql $DATABASE_URL -c "TRUNCATE TABLE users RESTART IDENTITY CASCADE;"
+
       - name: Run all tests with coverage
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/mytestdb
